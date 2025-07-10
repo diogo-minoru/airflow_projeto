@@ -1,4 +1,4 @@
-# 🔍 PokéAPI Data Fetcher
+# 🔍 Python Requests API
 
 Uma aplicação em Python que consome a [PokéAPI](https://pokeapi.co/) para buscar informações de Pokémon como **ID**, **nome**, **peso**, **altura** e **tipo(s)** usando a biblioteca `requests`.
 
