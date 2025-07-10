@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 from time import sleep
+import os
 
 
 class RequestPokemon():
@@ -36,4 +37,7 @@ class RequestPokemon():
                 pokemons_df.append(pokemon_data)
             
             sleep(0.2)
-        pd.DataFrame(pokemons_df).set_index("id").to_json("../data/pokemon_json.json")
+        data_dir = "../data"
+        json_path = os.path.join(data_dir, "pokemon_json.json")
+        os.makedirs(data_dir, exist_ok=True)
+        pd.DataFrame(pokemons_df).set_index("id").to_json(json_path)

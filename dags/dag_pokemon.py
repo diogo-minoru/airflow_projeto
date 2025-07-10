@@ -4,6 +4,7 @@ from airflow.decorators import dag, task
 from datetime import datetime
 
 @dag(
+    dag_id = "dag_pokemon",
     start_date=datetime(2024, 1, 1),
     schedule="@daily",
     catchup=False,
@@ -16,14 +17,12 @@ def dag_pokemon():
     def capturar_pokemon():
         return RequestPokemon().dados_pokemon()
 
-    capturar_pokemon()
-
     @task
     def enviar_bucket():
         return EnviarParaBucket().executar_backup()
 
     executar_request = capturar_pokemon()
-    salvar_bucket = enviar_bucket
+    salvar_bucket = enviar_bucket()
 
     executar_request >> salvar_bucket
 
