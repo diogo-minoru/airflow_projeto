@@ -12,15 +12,16 @@ class RequestPokemon():
             data = requests.get(url).json()
             return int(data["count"])
         except Exception as e:
-            raise print(f"Não foi possível acessar o link: {e}")
+            raise Exception(f"Não foi possível acessar o link: {e}")
 
 
     def dados_pokemon(self):
         pokemons_df = []
-        for i in range(0, self.total_pokemon, 20):
+        for i in range(0, 41, 20):
+        #for i in range(0, self.total_pokemon(), 20):
             print(f"Buscando dados de pokemóns entre {i} e {i+20}")
             page_url = requests.get(f"https://pokeapi.co/api/v2/pokemon?offset={i}&limit=20").json()
-
+            sleep(0.2)
             pokemon_url_list = [result["url"] for result in page_url["results"]]
 
             for pokemon_url in pokemon_url_list:
@@ -35,4 +36,4 @@ class RequestPokemon():
                 pokemons_df.append(pokemon_data)
             
             sleep(0.2)
-        return pd.DataFrame(pokemons_df).set_index("id")
+        pd.DataFrame(pokemons_df).set_index("id").to_json("../data/pokemon_json.json")
