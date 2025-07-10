@@ -11,7 +11,7 @@ from datetime import datetime
 )
 
 def dag_pokemon():
-    capturar_pokemon = RequestPokemon()
-    capturar_pokemon.main()
+    capturar_pokemon = RequestPokemon().main()
+    capturar_pokemon
 
 dag_pokemon()
