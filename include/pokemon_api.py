@@ -37,7 +37,6 @@ class RequestPokemon():
                 pokemons_df.append(pokemon_data)
             
             sleep(0.2)
-        data_dir = "../data"
-        json_path = os.path.join(data_dir, "pokemon_json.json")
+        data_dir = "/tmp/data"
         os.makedirs(data_dir, exist_ok=True)
-        pd.DataFrame(pokemons_df).set_index("id").to_json(json_path)
+        pd.DataFrame(pokemons_df).set_index("id").to_json(f"{data_dir}/pokemon_json.json")

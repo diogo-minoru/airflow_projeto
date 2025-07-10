@@ -15,15 +15,12 @@ def dag_pokemon():
 
     @task
     def capturar_pokemon():
-        return RequestPokemon().dados_pokemon()
+        RequestPokemon().dados_pokemon()
 
     @task
     def enviar_bucket():
-        return EnviarParaBucket().executar_backup()
+        EnviarParaBucket().executar_backup()
 
-    executar_request = capturar_pokemon()
-    salvar_bucket = enviar_bucket()
-
-    executar_request >> salvar_bucket
+    capturar_pokemon() >> enviar_bucket()
 
 dag_pokemon()
